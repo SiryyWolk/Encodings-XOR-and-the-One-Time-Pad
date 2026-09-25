@@ -1,54 +1,44 @@
 # Encodings-XOR-and-the-One-Time-Pad
 
-## ASCII Decryption
+## ASCII Encoding and Decoding
 
-The file `Practical-3/ASCII_Encrypted.txt` contains a list of decimal
-numbers. Each number represents one character in ASCII (American Standard
-Code for Information Interchange).
+`Practical-3/ASCII.py` combines ASCII encoding and decoding into one
+program. It saves encoded values in `Practical-3/ASCII_Encrypted.txt` and
+decoded plaintext in `Practical-3/ASCII_Decryted.txt`.
 
-For example:
+### Encode a message
 
-```text
-65, 83, 67, 73, 73
-```
-
-represents:
-
-```text
-ASCII
-```
-
-### What the program does
-
-`Practical-3/ASCII-Decryption.py` performs these steps:
-
-1. Finds `ASCII_Encrypted.txt` in the same folder as the Python script.
-2. Reads the list of decimal ASCII values from the file.
-3. Uses `ast.literal_eval()` to safely convert the text list into Python data.
-4. Converts the values into bytes.
-5. Decodes the bytes as ASCII characters.
-6. Writes the decoded message to `Practical-3/ASCII_Decrypted.txt`.
-7. Prints the decoded message in the terminal.
-
-### How to use it
-
-Open a terminal in the project folder and run:
+Run this command from the `Practical-3` folder:
 
 ```bash
-python3 Practical-3/ASCII-Decryption.py
+python3 ASCII.py -e
 ```
 
-The program prints the decrypted message and creates or replaces:
+When the program displays `Write a message:`, type any ASCII sentence and
+press Enter. The program saves the values to `ASCII_Encrypted.txt` and
+prints a confirmation. The file contains values such as:
 
-```text
-Practical-3/ASCII_Decrypted.txt
+```python
+encrypted_message_ascii = [72, 101, 108, 108, 111]
 ```
 
-For the current input, the output is:
+These values represent `Hello` in decimal ASCII.
 
-```text
-ASCII stands for American Standard Code for Information Interchange.
+### Decode the message
+
+Run the decoder after encrypting a message:
+
+```bash
+python3 ASCII.py -d
 ```
+
+The program reads the values from `ASCII_Encrypted.txt`, prints the original
+message in the terminal, and saves it to `ASCII_Decryted.txt`. Run `-e` again
+to replace the encrypted file with a new message.
+
+The program supports ASCII characters only and reports an error for
+non-ASCII characters. This is ASCII encoding, not encryption in the security
+sense: anyone who sees the numbers can decode them.
 
 ### Important note
 
