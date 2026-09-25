@@ -4,7 +4,7 @@
 
 `Practical-3/ASCII.py` combines ASCII encoding and decoding into one
 program. It saves encoded values in `Practical-3/ASCII_Encrypted.txt` and
-decoded plaintext in `Practical-3/ASCII_Decryted.txt`.
+decoded plaintext in `Practical-3/ASCII_Decrypted.txt`.
 
 ### Encode a message
 
@@ -19,7 +19,7 @@ press Enter. The program saves the values to `ASCII_Encrypted.txt` and
 prints a confirmation. The file contains values such as:
 
 ```python
-encrypted_message_ascii = [72, 101, 108, 108, 111]
+[72, 101, 108, 108, 111]
 ```
 
 These values represent `Hello` in decimal ASCII.
@@ -33,7 +33,7 @@ python3 ASCII.py -d
 ```
 
 The program reads the values from `ASCII_Encrypted.txt`, prints the original
-message in the terminal, and saves it to `ASCII_Decryted.txt`. Run `-e` again
+message in the terminal, and saves it to `ASCII_Decrypted.txt`. Run `-e` again
 to replace the encrypted file with a new message.
 
 The program supports ASCII characters only and reports an error for

@@ -4,7 +4,7 @@ from pathlib import Path
 
 
 ENCRYPTED_FILE = Path(__file__).with_name("ASCII_Encrypted.txt")
-DECRYPTED_FILE = Path(__file__).with_name("ASCII_Decryted.txt")
+DECRYPTED_FILE = Path(__file__).with_name("ASCII_Decrypted.txt")
 
 
 def encrypt_message():
