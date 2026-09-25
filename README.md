@@ -1,95 +1,105 @@
 # Encodings XOR and the One Time Pad
 
+This project shows three related ideas:
+
+- ASCII encoding and decoding
+- XOR as a bitwise operation
+- The one-time pad cipher
+
 ## ASCII Encoding and Decoding
 
-`Practical-3/ASCII.py` combines ASCII encoding and decoding into one
-program. It saves encoded values in `Practical-3/ASCII_Encrypted.txt` and
-decoded plaintext in `Practical-3/ASCII_Decrypted.txt`.
+`Practical-3/ASCII.py` combines ASCII encoding and decoding into one program.
+It saves encoded values in `Practical-3/ASCII_Encrypted.txt` and decoded text in
+`Practical-3/ASCII_Decrypted.txt`.
 
 ### Encode a message
 
-Run this command from the `Practical-3` folder:
+From the `Practical-3` folder, run:
 
 ```bash
 python3 ASCII.py -e
 ```
 
-When the program displays `Write a message:`, type any ASCII sentence and
-press Enter. The program saves the values to `ASCII_Encrypted.txt` and
-prints a confirmation. The file contains values such as:
+When prompted, type a message. The program stores the ASCII values in the
+encrypted file, for example:
 
 ```python
 [72, 101, 108, 108, 111]
 ```
 
-These values represent `Hello` in decimal ASCII.
+This represents `Hello` in decimal ASCII.
 
 ### Decode the message
-
-Run the decoder after encrypting a message:
 
 ```bash
 python3 ASCII.py -d
 ```
 
-The program reads the values from `ASCII_Encrypted.txt`, prints the original
-message in the terminal, and saves it to `ASCII_Decrypted.txt`. Run `-e` again
-to replace the encrypted file with a new message.
-
-The program supports ASCII characters only and reports an error for
-non-ASCII characters. This is ASCII encoding, not encryption in the security
-sense: anyone who sees the numbers can decode them.
+The program reads the saved values, converts them back to characters, and saves
+the plaintext output. This is simple data conversion, not secure encryption.
 
 ### Important note
 
-This example is ASCII decoding, not one-time-pad decryption. ASCII converts
-numbers into characters. One-time-pad decryption uses XOR and requires both
-the ciphertext and the matching key. The `one_time_pad.py` program handles
-that XOR operation when a key and ciphertext are available.
+ASCII is just a way of representing text as numbers. Anyone who sees those
+numbers can decode them, so this is not real cryptography.
 
-## How the One-Time Pad Works
+## XOR Basics
 
-A one-time pad is a stream cipher that uses a key as long as the message. In
-this project, the key is generated with `os.urandom(length)` so it is random
-and unpredictable.
-
-The encryption and decryption step uses XOR, a bitwise operation:
+The file `Practical-3/xor.py` demonstrates XOR on byte sequences. XOR is a
+bitwise operation, not a base-conversion or big-number calculation.
 
 ```python
-ciphertext_byte = plaintext_byte ^ key_byte
+def xor_bytes(bytes_seq_1, bytes_seq_2):
+    return bytes([a ^ b for a, b in zip(bytes_seq_1, bytes_seq_2)])
 ```
 
-XOR works like this:
+XOR rules:
 
 - 0 ^ 0 = 0
 - 0 ^ 1 = 1
 - 1 ^ 0 = 1
 - 1 ^ 1 = 0
 
-Because XOR is its own inverse, the same operation can be used to decrypt:
+Because XOR is reversible, the same operation can be used to undo it:
+
+```python
+ciphertext_byte = plaintext_byte ^ key_byte
+plaintext_byte = ciphertext_byte ^ key_byte
+```
+
+This is the same idea used in a one-time pad.
+
+## How the One-Time Pad Works
+
+A one-time pad is a stream cipher that uses a key as long as the message. In
+this project, the key is generated using `os.urandom(length)`, which produces a
+random byte sequence.
+
+Encryption is:
+
+```python
+ciphertext_byte = plaintext_byte ^ key_byte
+```
+
+Decryption is:
 
 ```python
 plaintext_byte = ciphertext_byte ^ key_byte
 ```
 
-This means:
-
-- Encrypt: `C = P XOR K`
-- Decrypt: `P = C XOR K`
-
 The key must be:
 
 - truly random
-- at least as long as the message
+- the same length as the message
 - used only once
-- shared securely between sender and receiver
+- kept secret by both sender and receiver
 
-If the wrong key is used, the output is garbage; if the same key is reused,
-attackers can detect patterns and break the cipher.
+If the key is reused or guessed, the encryption is no longer secure.
 
-In `Practical-3/one_time_pad.py`, the program checks that the plaintext and key
-have the same length before XORing each byte. The key is output as hexadecimal,
-and the ciphertext is also printed in hexadecimal so it can be safely shared.
+The script `Practical-3/one_time_pad.py` checks that the message and key have
+matching lengths before XORing each byte. It prints the key and ciphertext in
+hexadecimal so they can be shared safely.
 
-This is why one-time pad encryption is considered information-theoretically
-secure, as long as the key remains secret and is never reused.
+This is why the one-time pad is considered theoretically secure: as long as the
+key is secret and never reused, the ciphertext reveals no useful information
+about the plaintext.
