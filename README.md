@@ -1,4 +1,4 @@
-# Encodings-XOR-and-the-One-Time-Pad
+# Encodings XOR and the One Time Pad
 
 ## ASCII Encoding and Decoding
 
