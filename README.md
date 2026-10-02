@@ -205,6 +205,70 @@ This file stores the plaintext recovered after decoding the ASCII values back in
 
 ---
 
+## How to use it
+
+Run the scripts from the project root or inside the Practical-3 folder.
+
+### ASCII.py
+
+```bash
+cd Practical-3
+python3 ASCII.py -e
+python3 ASCII.py -d
+```
+
+- -e: enter plaintext and save the ASCII values to ASCII_Encrypted.txt
+- -d: read the saved ASCII values and recover the plaintext
+
+### xor.py
+
+```bash
+cd Practical-3
+python3 xor.py
+```
+
+This script prints several XOR examples and demonstrates XOR properties.
+
+### one_time_pad.py
+
+```bash
+cd Practical-3
+python3 one_time_pad.py -e
+python3 one_time_pad.py -d
+```
+
+- -e: generate a random key, encrypt a plaintext message, and print the hex key and ciphertext
+- -d: enter a key and ciphertext in hex form to decrypt the message
+
+### Base64.py
+
+```bash
+cd Practical-3
+python3 Base64.py
+```
+
+This script converts the embedded hex string to Base64 and prints the result.
+
+### Encrypted_Message_ASCII.py
+
+```bash
+cd Practical-3
+python3 Encrypted_Message_ASCII.py
+```
+
+This script simply prints the example ASCII-encoded message as a Python list.
+
+### bignum_converter.py
+
+```bash
+cd Practical-3
+python3 bignum_converter.py
+```
+
+This script converts the large integer into bytes and prints the result.
+
+---
+
 ## Learning goals
 
 This project is designed to illustrate that:
